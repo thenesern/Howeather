@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import WeatherCard from "./UI/Card/Card.js";
 
 function CardAPI(props) {
-  const key = "569e07fb109c0a84bf1f94765ccfcf4e";
-  const keyAlt = "165646a7eea43e8eae8c831b8da3d125";
+  const key = "165646a7eea43e8eae8c831b8da3d125";
   const [weatherDeg, setWeatherDeg] = useState();
   const [weatherIcon, setWeatherIcon] = useState();
   const [weatherCity, setWeatherCity] = useState();
@@ -17,7 +16,7 @@ function CardAPI(props) {
   useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${keyAlt}&units=metric&lang=en`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric&lang=en`
       )
       .then((res) => {
         setWeatherCity(res.data.name);
