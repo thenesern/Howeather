@@ -1,0 +1,119 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  #cityName {
+    text-align: flex-start;
+  }
+  
+  .deg {
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .img {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .box__imgDeg {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .boxDescription {
+    text-align: center;
+    font-size: 12px;
+  }
+  
+  .boxDescription::first-letter {
+    text-transform: capitalize;
+  }
+  
+  .right {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .outputs {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 16%;
+    padding: 0 2rem;
+    backdrop-filter: blur(16px);
+    border-radius: 12px 12px 0 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    z-index: 1;
+  }
+  
+  .video {
+    position: relative;
+    border-radius: 1rem;
+    width: 100%;
+  }
+  
+  .date {
+    font-size: 14px;
+  }
+  
+  @media only screen and (max-width: 1366px) {
+    #cityName {
+      text-align: flex-start;
+      font-size: 1rem;
+    }
+  
+    .right {
+      width: 50%;
+    }
+  
+    .deg {
+      font-size: 12px;
+    }
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .container {
+      order: 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .video {
+      width: 96%;
+    }
+  
+    .outputs {
+      width: 96%;
+      padding: 0 1rem;
+      height: 24%;
+    }
+  
+    .img {
+      width: 2rem;
+      height: 2rem;
+    }
+  
+    .boxDescription,
+    .date,
+    .deg,
+    #cityName {
+      font-size: 11px;
+    }
+  }
