@@ -14,7 +14,7 @@ function Header() {
         <div id={styles.navLinks}>
           <a
             className={styles.navLink}
-            href="https://github.com/thenesern/React-Workplace/tree/master/src/components/WeatherApp"
+            href="https://github.com/thenesern/Howeather"
             target={"_blank"}
             rel="noreferrer"
           >
