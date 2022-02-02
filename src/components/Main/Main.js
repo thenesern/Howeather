@@ -3,13 +3,35 @@ import { useState } from "react";
 // Styles
 import styles from "./Main.module.css";
 // Components
-import InputAPI from "../../InputAPI";
+import InputAPI from "../../MainAPI";
+import axios from "axios";
 
 function Main() {
-  const [inputCity, setInputCity] = useState("Ankara");
+  const [inputCity, setInputCity] = useState();
   const [input, setInput] = useState();
   const [inputValue, setInputValue] = useState("");
+  const key = "AIzaSyC0-bozypIT8J3u42EbffIb5Me0X67Nsrk";
+  let lat;
+  let long;
 
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+  function showPosition(position) {
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
+    axios(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`
+    ).then((res) => {
+      setInputCity(res.data.results[8].address_components[0].long_name);
+    });
+  }
+
+  getLocation();
   function citySubmitHandler(e) {
     e.preventDefault();
     setInputCity(input);
@@ -24,13 +46,13 @@ function Main() {
   return (
     <main>
       <form className={styles.inputContainer} onSubmit={citySubmitHandler}>
-        <label htmlFor="search">Search a city:</label>
         <input
           type="text"
           id="input"
           className={styles.search}
           onChange={inputChangeHandler}
           value={inputValue}
+          placeholder="Search a City"
         />
         <input type="submit" className={styles.glass} value="🔍" />
       </form>
