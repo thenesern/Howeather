@@ -7,7 +7,15 @@ import InputAPI from "../../MainAPI";
 import axios from "axios";
 
 function Main() {
-  const [inputCity, setInputCity] = useState();
+  let initCity;
+  if (navigator.language === "tr") initCity = "istanbul";
+  else if (navigator.language === "ar") initCity = "riyadh";
+  else if (navigator.language === "fr") initCity = "paris";
+  else if (navigator.language === "de") initCity = "berlin";
+  else if (navigator.language === "zh") initCity = "beijing";
+  else initCity = "new york";
+
+  const [inputCity, setInputCity] = useState(initCity);
   const [input, setInput] = useState();
   const [inputValue, setInputValue] = useState("");
   const key = "AIzaSyC0-bozypIT8J3u42EbffIb5Me0X67Nsrk";
@@ -24,13 +32,13 @@ function Main() {
   function showPosition(position) {
     lat = position.coords.latitude;
     long = position.coords.longitude;
+
     axios(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`
     ).then((res) => {
       setInputCity(res.data.results[8].address_components[0].long_name);
     });
   }
-
   getLocation();
   function citySubmitHandler(e) {
     e.preventDefault();
@@ -42,7 +50,6 @@ function Main() {
     setInput(e.target.value);
     setInputValue(e.target.value);
   }
-
   return (
     <main>
       <form className={styles.inputContainer} onSubmit={citySubmitHandler}>
