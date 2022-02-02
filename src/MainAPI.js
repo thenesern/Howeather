@@ -8,43 +8,43 @@ import AsideRight from "./components/UI/AsideRight/AsideRight.js";
 
 function InputAPI(props) {
   const key = "ff2e21468d0bd228ea8adbb12de2a82f";
-  const [inputDeg, setInputDeg] = useState();
-  const [inputIcon, setInputIcon] = useState();
-  const [inputCity, setInputCity] = useState();
-  const [inputDes, setInputDes] = useState();
-  const [videoLink, setVideoLink] = useState();
-  const [dayOne, setDayOne] = useState();
-  const [dayTwo, setDayTwo] = useState();
-  const [dayThree, setDayThree] = useState();
-  const [dayFour, setDayFour] = useState();
-  const [dayFive, setDayFive] = useState();
-  const [daySix, setDaySix] = useState();
-  const [daySeven, setDaySeven] = useState();
-  const [dayOneIcon, setDayOneIcon] = useState();
-  const [dayTwoIcon, setDayTwoIcon] = useState();
-  const [dayThreeIcon, setDayThreeIcon] = useState();
-  const [dayFourIcon, setDayFourIcon] = useState();
-  const [dayFiveIcon, setDayFiveIcon] = useState();
-  const [daySixIcon, setDaySixIcon] = useState();
-  const [daySevenIcon, setDaySevenIcon] = useState();
-  const [nightOne, setNightOne] = useState();
-  const [nightTwo, setNightTwo] = useState();
-  const [nightThree, setNightThree] = useState();
-  const [nightFour, setNightFour] = useState();
-  const [nightFive, setNightFive] = useState();
-  const [nightSix, setNightSix] = useState();
-  const [nightSeven, setNightSeven] = useState();
-  const [descriptionOne, setDescriptionOne] = useState();
-  const [descriptionTwo, setDescriptionTwo] = useState();
-  const [descriptionThree, setDescriptionThree] = useState();
-  const [descriptionFour, setDescriptionFour] = useState();
-  const [descriptionFive, setDescriptionFive] = useState();
-  const [descriptionSix, setDescriptionSix] = useState();
-  const [descriptionSeven, setDescriptionSeven] = useState();
-  const [feelsDay, setFeelsDay] = useState();
-  const [feelsNight, setFeelsNight] = useState();
-  const [feelsMorn, setFeelsMorn] = useState();
-  const [feelsEve, setFeelsEve] = useState();
+  const [inputDeg, setInputDeg] = useState("Loading");
+  const [inputIcon, setInputIcon] = useState("Loading");
+  const [inputCity, setInputCity] = useState("Loading");
+  const [inputDes, setInputDes] = useState("Loading");
+  const [videoLink, setVideoLink] = useState("Loading");
+  const [dayOne, setDayOne] = useState("Loading");
+  const [dayTwo, setDayTwo] = useState("Loading");
+  const [dayThree, setDayThree] = useState("Loading");
+  const [dayFour, setDayFour] = useState("Loading");
+  const [dayFive, setDayFive] = useState("Loading");
+  const [daySix, setDaySix] = useState("Loading");
+  const [daySeven, setDaySeven] = useState("Loading");
+  const [dayOneIcon, setDayOneIcon] = useState("Loading");
+  const [dayTwoIcon, setDayTwoIcon] = useState("Loading");
+  const [dayThreeIcon, setDayThreeIcon] = useState("Loading");
+  const [dayFourIcon, setDayFourIcon] = useState("Loading");
+  const [dayFiveIcon, setDayFiveIcon] = useState("Loading");
+  const [daySixIcon, setDaySixIcon] = useState("Loading");
+  const [daySevenIcon, setDaySevenIcon] = useState("Loading");
+  const [nightOne, setNightOne] = useState("Loading");
+  const [nightTwo, setNightTwo] = useState("Loading");
+  const [nightThree, setNightThree] = useState("Loading");
+  const [nightFour, setNightFour] = useState("Loading");
+  const [nightFive, setNightFive] = useState("Loading");
+  const [nightSix, setNightSix] = useState("Loading");
+  const [nightSeven, setNightSeven] = useState("Loading");
+  const [descriptionOne, setDescriptionOne] = useState("Loading");
+  const [descriptionTwo, setDescriptionTwo] = useState("Loading");
+  const [descriptionThree, setDescriptionThree] = useState("Loading");
+  const [descriptionFour, setDescriptionFour] = useState("Loading");
+  const [descriptionFive, setDescriptionFive] = useState("Loading");
+  const [descriptionSix, setDescriptionSix] = useState("Loading");
+  const [descriptionSeven, setDescriptionSeven] = useState("Loading");
+  const [feelsDay, setFeelsDay] = useState("Loading");
+  const [feelsNight, setFeelsNight] = useState("Loading");
+  const [feelsMorn, setFeelsMorn] = useState("Loading");
+  const [feelsEve, setFeelsEve] = useState("Loading");
   const iconOne = `http://openweathermap.org/img/wn/${dayOneIcon}@2x.png`;
   const iconTwo = `http://openweathermap.org/img/wn/${dayTwoIcon}@2x.png`;
   const iconThree = `http://openweathermap.org/img/wn/${dayThreeIcon}@2x.png`;
@@ -65,11 +65,11 @@ function InputAPI(props) {
         setInputIcon(res.data.weather[0].icon);
         setInputCity(res.data.name);
         setInputDes(res.data.weather[0].description);
-        if (res.data.weather[0].description.includes("cloud")) {
+        if (res.data.weather[0].description.includes("broken clouds")) {
           setVideoLink(
             "https://player.vimeo.com/external/408642844.sd.mp4?s=5a6ddff01fb9323efbde4616fc052f3d939adb05&profile_id=139&oauth2_token_id=57447761"
           );
-        } else if (res.data.weather[0].description.includes("broken clouds")) {
+        } else if (res.data.weather[0].description.includes("clouds")) {
           setVideoLink(
             "https://player.vimeo.com/external/314728144.sd.mp4?s=6805a87f81188a7f01d0394461308cae09716633&profile_id=164&oauth2_token_id=57447761"
           );

@@ -6,10 +6,10 @@ import WeatherCard from "./UI/Card/Card.js";
 
 function CardAPI(props) {
   const key = "165646a7eea43e8eae8c831b8da3d125";
-  const [weatherDeg, setWeatherDeg] = useState();
-  const [weatherIcon, setWeatherIcon] = useState();
-  const [weatherCity, setWeatherCity] = useState();
-  const [weatherDes, setWeatherDes] = useState();
+  const [weatherDeg, setWeatherDeg] = useState("Loading");
+  const [weatherIcon, setWeatherIcon] = useState("Loading");
+  const [weatherCity, setWeatherCity] = useState("Loading");
+  const [weatherDes, setWeatherDes] = useState("Loading");
 
   let city = props.weatherCity;
 
