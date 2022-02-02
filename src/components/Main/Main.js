@@ -19,8 +19,8 @@ function Main() {
   const [input, setInput] = useState();
   const [inputValue, setInputValue] = useState("");
   const key = "AIzaSyC0-bozypIT8J3u42EbffIb5Me0X67Nsrk";
-  let lat;
-  let long;
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
 
   useEffect(() => {
     function getLocation() {
@@ -32,16 +32,16 @@ function Main() {
     }
     getLocation();
     function showPosition(position) {
-      lat = position.coords.latitude;
-      long = position.coords.longitude;
+      setLat(position.coords.latitude);
+      setLon(position.coords.longitude);
 
       axios(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`
       ).then((res) => {
         setInputCity(res.data.results[8].address_components[0].long_name);
       });
     }
-  }, [lat]);
+  }, [lat, lon]);
 
   function citySubmitHandler(e) {
     e.preventDefault();
