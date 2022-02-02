@@ -58,7 +58,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: #264653;
   font-size: 24px;
   z-index: 1;
 }
