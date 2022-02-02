@@ -1,5 +1,5 @@
 // Packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Styles
 import styles from "./Main.module.css";
 // Components
@@ -22,24 +22,27 @@ function Main() {
   let lat;
   let long;
 
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+  useEffect(() => {
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
     }
-  }
-  function showPosition(position) {
-    lat = position.coords.latitude;
-    long = position.coords.longitude;
+    getLocation();
+    function showPosition(position) {
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
 
-    axios(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`
-    ).then((res) => {
-      setInputCity(res.data.results[8].address_components[0].long_name);
-    });
-  }
-  getLocation();
+      axios(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`
+      ).then((res) => {
+        setInputCity(res.data.results[8].address_components[0].long_name);
+      });
+    }
+  }, [lat]);
+
   function citySubmitHandler(e) {
     e.preventDefault();
     setInputCity(input);

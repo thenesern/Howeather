@@ -71,7 +71,7 @@ function InputAPI(props) {
           );
         } else if (res.data.weather[0].description.includes("clouds")) {
           setVideoLink(
-            "https://player.vimeo.com/external/314728144.sd.mp4?s=6805a87f81188a7f01d0394461308cae09716633&profile_id=164&oauth2_token_id=57447761"
+            "https://player.vimeo.com/external/210730141.sd.mp4?s=e58a94323301b678e36275c0a85dd4eac34050d0&profile_id=164&oauth2_token_id=57447761"
           );
         } else if (res.data.weather[0].description.includes("snow")) {
           setVideoLink(
