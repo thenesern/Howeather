@@ -7,15 +7,8 @@ import InputAPI from "../../MainAPI";
 import axios from "axios";
 
 function Main() {
-  let initCity;
-  if (navigator.language === "tr") initCity = "istanbul";
-  else if (navigator.language === "ar") initCity = "riyadh";
-  else if (navigator.language === "fr") initCity = "paris";
-  else if (navigator.language === "de") initCity = "berlin";
-  else if (navigator.language === "zh") initCity = "beijing";
-  else initCity = "new york";
-
-  const [inputCity, setInputCity] = useState(initCity);
+  const [isLoading, setIsLoading] = useState(false);
+  const [inputCity, setInputCity] = useState();
   const [input, setInput] = useState();
   const [inputValue, setInputValue] = useState("");
   const key = "AIzaSyC0-bozypIT8J3u42EbffIb5Me0X67Nsrk";
@@ -23,30 +16,40 @@ function Main() {
   const [lon, setLon] = useState();
 
   useEffect(() => {
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
+    setIsLoading(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, NoLocation);
     }
-    getLocation();
-    function showPosition(position) {
+    function NoLocation() {
+      if (navigator.language === "tr") setInputCity("istanbul");
+      else if (navigator.language === "ar") setInputCity("riyadh");
+      else if (navigator.language === "fr") setInputCity("paris");
+      else if (navigator.language === "de") setInputCity("berlin");
+      else if (navigator.language === "zh") setInputCity("beijing");
+      else setInputCity("new york");
+      setIsLoading(false);
+    }
+    async function showPosition(position) {
       setLat(position.coords.latitude);
       setLon(position.coords.longitude);
 
-      axios(
+      await axios(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`
       ).then((res) => {
-        setInputCity(res.data.results[8].address_components[0].long_name);
+        setInputCity(res.data.results[0].address_components[2].long_name);
       });
+      setIsLoading(false);
     }
   }, [lat, lon]);
 
   function citySubmitHandler(e) {
     e.preventDefault();
-    setInputCity(input);
-    setInputValue("");
+    if (inputValue.trim().length > 0) {
+      setInputCity(input);
+      setInputValue("");
+    } else {
+      return;
+    }
   }
 
   function inputChangeHandler(e) {
@@ -67,7 +70,20 @@ function Main() {
         <input type="submit" className={styles.glass} value="🔍" />
       </form>
       <div id="output" className={styles.outputContainer}>
-        <InputAPI cityName={inputCity} />
+        {isLoading ? (
+          <>
+            <div></div>
+            <div className={styles.loaderContainer}>
+              <p className={styles.locationMessage}>
+                Waiting for your location
+              </p>
+              <div className={styles.loader}></div>
+            </div>
+            <div></div>
+          </>
+        ) : (
+          <InputAPI cityName={inputCity} />
+        )}
       </div>
     </main>
   );
