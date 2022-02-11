@@ -21,7 +21,7 @@ function CardAPI(props) {
       .then((res) => {
         setWeatherCity(res.data.name);
         setWeatherIcon(res.data.weather[0].icon);
-        setWeatherDeg(res.data.main.temp);
+        setWeatherDeg(Math.floor(res.data.main.temp));
         setWeatherDes(res.data.weather[0].description);
       })
       .catch((err) => console.log(err));

@@ -6,7 +6,7 @@ import MainCard from "./components/UI/Main/MainCard.js";
 import Aside from "./components/UI/AsideLeft/AsideLeft.js";
 import AsideRight from "./components/UI/AsideRight/AsideRight.js";
 
-function InputAPI(props) {
+const InputAPI = (props) => {
   const key = "ff2e21468d0bd228ea8adbb12de2a82f";
   const [inputDeg, setInputDeg] = useState("Loading");
   const [inputIcon, setInputIcon] = useState("Loading");
@@ -61,7 +61,7 @@ function InputAPI(props) {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric&lang=en`
       )
       .then((res) => {
-        setInputDeg(res.data.main.temp);
+        setInputDeg(Math.floor(res.data.main.temp));
         setInputIcon(res.data.weather[0].icon);
         setInputCity(res.data.name);
         setInputDes(res.data.weather[0].description);
@@ -81,9 +81,9 @@ function InputAPI(props) {
           setVideoLink(
             "https://player.vimeo.com/external/216445899.sd.mp4?s=12a8bdab939bda39a710f02e093e069e55067719&profile_id=164&oauth2_token_id=57447761"
           );
-        } else if (res.data.weather[0].description.includes("clear sky")) {
+        } else if (res.data.weather[0].description === "clear sky") {
           setVideoLink(
-            "https://player.vimeo.com/external/420221145.sd.mp4?s=506857402d98eb686107e5ec482050bea5f1b33e&profile_id=139&oauth2_token_id=57447761"
+            "https://player.vimeo.com/external/469883447.sd.mp4?s=11f1e9a906f10f682a8410ff1a09b72cae76d398&profile_id=139&oauth2_token_id=57447761"
           );
         } else if (res.data.weather[0].description.includes("storm")) {
           setVideoLink(
@@ -105,13 +105,13 @@ function InputAPI(props) {
             `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=${key}`
           )
           .then((res) => {
-            setDayOne(res.data.list[0].temp.day);
-            setDayTwo(res.data.list[1].temp.day);
-            setDayThree(res.data.list[2].temp.day);
-            setDayFour(res.data.list[3].temp.day);
-            setDayFive(res.data.list[4].temp.day);
-            setDaySix(res.data.list[5].temp.day);
-            setDaySeven(res.data.list[6].temp.day);
+            setDayOne(Math.floor(res.data.list[0].temp.day));
+            setDayTwo(Math.floor(res.data.list[1].temp.day));
+            setDayThree(Math.floor(res.data.list[2].temp.day));
+            setDayFour(Math.floor(res.data.list[3].temp.day));
+            setDayFive(Math.floor(res.data.list[4].temp.day));
+            setDaySix(Math.floor(res.data.list[5].temp.day));
+            setDaySeven(Math.floor(res.data.list[6].temp.day));
             setDayOneIcon(res.data.list[0].weather[0].icon);
             setDayTwoIcon(res.data.list[1].weather[0].icon);
             setDayThreeIcon(res.data.list[2].weather[0].icon);
@@ -119,13 +119,13 @@ function InputAPI(props) {
             setDayFiveIcon(res.data.list[4].weather[0].icon);
             setDaySixIcon(res.data.list[5].weather[0].icon);
             setDaySevenIcon(res.data.list[6].weather[0].icon);
-            setNightOne(res.data.list[0].temp.night);
-            setNightTwo(res.data.list[1].temp.night);
-            setNightThree(res.data.list[2].temp.night);
-            setNightFour(res.data.list[3].temp.night);
-            setNightFive(res.data.list[4].temp.night);
-            setNightSix(res.data.list[5].temp.night);
-            setNightSeven(res.data.list[6].temp.night);
+            setNightOne(Math.floor(res.data.list[0].temp.night));
+            setNightTwo(Math.floor(res.data.list[1].temp.night));
+            setNightThree(Math.floor(res.data.list[2].temp.night));
+            setNightFour(Math.floor(res.data.list[3].temp.night));
+            setNightFive(Math.floor(res.data.list[4].temp.night));
+            setNightSix(Math.floor(res.data.list[5].temp.night));
+            setNightSeven(Math.floor(res.data.list[6].temp.night));
             setDescriptionOne(res.data.list[0].weather[0].description);
             setDescriptionTwo(res.data.list[1].weather[0].description);
             setDescriptionThree(res.data.list[2].weather[0].description);
@@ -133,16 +133,15 @@ function InputAPI(props) {
             setDescriptionFive(res.data.list[4].weather[0].description);
             setDescriptionSix(res.data.list[5].weather[0].description);
             setDescriptionSeven(res.data.list[6].weather[0].description);
-            setFeelsDay(res.data.list[0].feels_like["day"]);
-            setFeelsNight(res.data.list[0].feels_like["night"]);
-            setFeelsMorn(res.data.list[0].feels_like["morn"]);
-            setFeelsEve(res.data.list[0].feels_like["eve"]);
+            setFeelsDay(Math.floor(res.data.list[0].feels_like["day"]));
+            setFeelsNight(Math.floor(res.data.list[0].feels_like["night"]));
+            setFeelsMorn(Math.floor(res.data.list[0].feels_like["morn"]));
+            setFeelsEve(Math.floor(res.data.list[0].feels_like["eve"]));
           })
           .catch((err) => console.log(err))
       )
       .catch((err) => console.log(err));
   }, [city]);
-
   return (
     <>
       <Aside
@@ -175,6 +174,7 @@ function InputAPI(props) {
         daySixDescription={descriptionSix}
         daySevenDescription={descriptionSeven}
       />
+
       <MainCard
         cityName={inputCity}
         cityDeg={inputDeg}
@@ -182,6 +182,7 @@ function InputAPI(props) {
         weatherDescription={inputDes}
         videoLink={videoLink}
       />
+
       <AsideRight
         feelsDay={feelsDay}
         feelsNight={feelsNight}
@@ -190,6 +191,6 @@ function InputAPI(props) {
       />
     </>
   );
-}
+};
 
 export default InputAPI;
