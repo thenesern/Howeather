@@ -36,7 +36,13 @@ function Main() {
       await axios(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`
       ).then((res) => {
-        setInputCity(res.data.results[0].address_components[2].long_name);
+        if (res.data.plus_code.compound_code.split("/")[1].split(",")[0]) {
+          setInputCity(
+            res.data.plus_code.compound_code.split("/")[1].split(",")[0]
+          );
+        } else {
+          setInputCity(res.data.results[0].address_components[2].long_name);
+        }
       });
       setIsLoading(false);
     }
